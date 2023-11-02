@@ -4,6 +4,5 @@
 	    "ghcr.io/julialang/devcontainer-features/julia:1": {
 	        "channel": "1.9"
 	    }
-	},
-	"remoteUser": "vscode"
+	}
 }
