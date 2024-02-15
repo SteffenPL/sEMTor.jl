@@ -69,6 +69,6 @@ jobs:
         shell: julia --project=docs --color=yes {0}
         run: |
           using Documenter: DocMeta, doctest
-          using sEMTor
-          DocMeta.setdocmeta!(sEMTor, :DocTestSetup, :(using sEMTor); recursive=true)
-          doctest(sEMTor)
+          using SEMTor
+          DocMeta.setdocmeta!(SEMTor, :DocTestSetup, :(using SEMTor); recursive=true)
+          doctest(SEMTor)

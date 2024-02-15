@@ -1,14 +1,14 @@
-using sEMTor
+using SEMTor
 using Documenter
 
-DocMeta.setdocmeta!(sEMTor, :DocTestSetup, :(using sEMTor); recursive=true)
+DocMeta.setdocmeta!(SEMTor, :DocTestSetup, :(using SEMTor); recursive=true)
 
 makedocs(;
-    modules=[sEMTor],
+    modules=[SEMTor],
     authors="Steffen Plunder <steffen.plunder@web.de> and contributors",
-    sitename="sEMTor.jl",
+    sitename="SEMTor.jl",
     format=Documenter.HTML(;
-        canonical="https://SteffenPL.github.io/sEMTor.jl",
+        canonical="https://SteffenPL.github.io/SEMTor.jl",
         edit_link="main",
         assets=String[],
     ),

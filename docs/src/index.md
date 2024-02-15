@@ -1,14 +1,14 @@
 ```@meta
-CurrentModule = sEMTor
+CurrentModule = SEMTor
 ```
 
-# sEMTor
+# SEMTor
 
-Documentation for [sEMTor](https://github.com/SteffenPL/sEMTor.jl).
+Documentation for [SEMTor](https://github.com/SteffenPL/SEMTor.jl).
 
 ```@index
 ```
 
 ```@autodocs
-Modules = [sEMTor]
+Modules = [SEMTor]
 ```
