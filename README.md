@@ -9,7 +9,7 @@
 Julia implementation for a computational model for epithelial-to-mesenchymal transitions-like events in a pseudostratified epithelium.
 
 See the preprint for more details:
-> **S. Plunder, C. Danesin, B. Glise, M. A. Ferreira, [S. Merino-Aceituno](https://sites.google.com/view/saramerinoaceituno){target="_blank"}, [E. Theveneau](https://cbi-toulouse.fr/eng/equipe-theveneau){target="_blank"}**, _Modelling variability and heterogeneity of EMT scenarios highlights nuclear positioning and protrusions as main drivers of extrusion._ **(2023)** [bioRxiv](https://www.biorxiv.org/content/10.1101/2023.11.17.567510v1){target="_blank"}.
+> **S. Plunder, C. Danesin, B. Glise, M. A. Ferreira, S. Merino-Aceituno, E. Theveneau**, _Modelling variability and heterogeneity of EMT scenarios highlights nuclear positioning and protrusions as main drivers of extrusion._ **(2023)** [bioRxiv](https://www.biorxiv.org/content/10.1101/2023.11.17.567510v1).
 
 
 ## Stand-alone EMT simulator (sEMTor)
