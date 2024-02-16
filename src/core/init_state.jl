@@ -124,7 +124,7 @@ end
 
 
 function generate_init_cell_types(p::StaticParameters)
-    @unpack N_init, init_distr, init_method = p.epi
+    (;N_init, init_distr, init_method) = p.epi
 
     v = split.(split(init_distr, ","), ":")
 

@@ -70,8 +70,8 @@ function new_cell_copy_startimes(s::State,p::StaticParameters,i::Int64)
 end
 
 function is_below_basal_layer(s::State{Dim}, p::StaticParameters, i::Int64, basal_info) where {Dim}
-    @unpack epi = p
-    @unpack no_curvature, Rb, y0, Rc = basal_info
+    epi = p.epi
+    (;no_curvature, Rb, y0, Rc) = basal_info
 
     if no_curvature
         return s.B[2,i] < 0.0 - 0.01
@@ -85,8 +85,8 @@ function is_below_basal_layer(s::State{Dim}, p::StaticParameters, i::Int64, basa
 end
 
 function nuclei_is_below_basal_layer(s::State{Dim}, p::StaticParameters, i::Int64, basal_info) where {Dim}
-    @unpack epi = p
-    @unpack no_curvature, Rb, y0, Rc = basal_info
+    epi = p.epi
+    (;no_curvature, Rb, y0, Rc) = basal_info
 
     if no_curvature
         return s.X[2,i] < 0.0 - 0.01

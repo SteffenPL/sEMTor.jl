@@ -1,6 +1,5 @@
 module SEMTor
 
-using UnPack
 using Printf
 using LinearAlgebra
 using Distributions
@@ -13,7 +12,6 @@ using DataFrames     # takes time
 using TOML
 using XLSX           # takes time
 
-using GLMakie
 using CairoMakie
 
 import Base.show

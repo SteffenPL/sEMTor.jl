@@ -1,5 +1,5 @@
 function compute_forces!(s::State{Dim}, cache) where {Dim}
-    @unpack forceX, forceA, forceB, da, dx, db, xixj, vl = cache
+    (;forceX, forceA, forceB, da, dx, db, xixj, vl) = cache
     N = num_cells(s)
 
     c = s.cells

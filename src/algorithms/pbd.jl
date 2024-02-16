@@ -1,6 +1,6 @@
 function pbd!(s::State, p::StaticParameters, basal_info, cache)
-    @unpack no_curvature, Rb, y0, Rc = basal_info
-    @unpack vl = cache
+    (;no_curvature, Rb, y0, Rc) = basal_info
+    (;vl) = cache
 
     c = s.cells
     # collision detection

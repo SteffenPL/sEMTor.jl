@@ -20,10 +20,10 @@ end
 function simulate(s::State{Dim}, p::StaticParameters, rep::Int64 = 1; 
     obs = missing, inplace=false, verbose=nothing, obs_callback=missing, pbd=true) where {Dim}
 
-    @unpack epi, sim, alg = p
-    @unpack t_end = sim
-    @unpack dt = alg
-    @unpack init_zone = epi
+    (;epi, sim, alg) = p
+    (;t_end) = sim
+    (;dt) = alg
+    (;init_zone) = epi
 
     c = s.cells
 
