@@ -1281,9 +1281,7 @@ version = "0.2.1"
 
 [[deps.SEMTor]]
 deps = ["CairoMakie", "DataFrames", "Distributions", "HybridArrays", "LinearAlgebra", "Printf", "ProgressMeter", "Random", "StaticArrays", "StructArrays", "TOML", "XLSX"]
-git-tree-sha1 = "89fdcc6d05bb9fc13a4d3a77f0b286bb87a745c9"
-repo-rev = "main"
-repo-url = "../.."
+path = "../.."
 uuid = "3aa00187-1793-4006-8dbf-b0a7dd891f4e"
 version = "1.0.0-DEV"
 
