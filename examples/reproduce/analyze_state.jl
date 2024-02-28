@@ -1,6 +1,6 @@
-function categorise(t1,t2,t3,t4, n1 = "A", n2 = "B", n3 = "P", n4 = "R", n0="")
+function categorise(t1,t2,t3, n1 = "A", n2 = "B", n3 = "S", n0="")
     tup(t,n) = (t, isinf(t) ? n0 : n)
-    Ts = [tup(t1,n1), tup(t2,n2), tup(t3,n3), tup(t4,n4)]
+    Ts = [tup(t1,n1), tup(t2,n2), tup(t3,n3)]
     sort!(Ts, by = tn -> tn[1])
     res = prod(tn[2] for tn in Ts)
     return isempty(res) ?  "∅" : res
@@ -41,13 +41,13 @@ function analyse_state(states, p, rep, cell_type, obs)
     df = DataFrame(type = String[],
 			rep = Int64[], label = Int64[], idx = Int64[],
 			INM = Bool[],
-			A = Float64[], B = Float64[], P = Float64[], R = Float64[],
+			A = Float64[], B = Float64[], S = Float64[], P = Float64[],
 			running_mode = Int64[],
 			apical_extr = Bool[], basal_extr = Bool[],
 			x_A = Float64[], y_A = Float64[],
 			x_B = Float64[], y_B = Float64[],
+			x_S = Float64[], y_S = Float64[],
 			x_P = Float64[], y_P = Float64[],
-			x_R = Float64[], y_R = Float64[],
 			x_init = Float64[], y_init = Float64[],
 			x_emt = Float64[], y_emt = Float64[],
 			x_end = Float64[], y_end = Float64[],
@@ -112,7 +112,7 @@ function analyse_state(states, p, rep, cell_type, obs)
 		end
 
 		for ob in obs
-			if ob.cell_sign == (ta,tb,tp)
+			if ob.cell_sign == (ta,tb,tp,tr)
 				if ob.event == 'A'
 					xA, yA = ob.rel_pos
 				elseif ob.event == 'B'
@@ -120,7 +120,7 @@ function analyse_state(states, p, rep, cell_type, obs)
 				elseif ob.event == 'P'
 					xP, yP = ob.rel_pos
 				elseif ob.event == 'R'
-					xR, yR = ob.rel_pos
+				 	xR, yR = ob.rel_pos
 				end
 
 				if ob.t == min(ta,tb,tp,tr)
@@ -166,3 +166,6 @@ function collect_times(s, p, i, event, obs)
 					cell_sign = (tA, tB, tP, tR)))
 	end
 end
+
+
+

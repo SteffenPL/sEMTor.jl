@@ -1,4 +1,4 @@
-using SEMTor, DataFrames, ProgressMeter, CSV, Statistics
+using SEMTor, DataFrames, ProgressMeter, CSV, Statistics, XLSX
 include("analyze_state.jl")
 
 #=  
@@ -26,7 +26,7 @@ include("analyze_state.jl")
     Moreover, it is shared as an executable code ocean capsule: URL
 =#
 
-n_rep = get(ARGS, 1, 150000)
+n_rep = get(ARGS, 1, 15000)
 p_inm = get(ARGS, 2, 30)
 p_run = get(ARGS, 3, 50)
 
@@ -62,12 +62,98 @@ end
 
 df = reduce(vcat, df)
 
-df[!,:scenario] = categorise.(df.A, df.B, df.P, df.R)
-scenarios = unique(df.scenario)
-sort_scenarios!(scenarios)
+df[!,:scenario] = categorise.(df.A, df.B, df.S)
+
 
 Δt = 6.0
 Δy = 0.33
 
 CSV.write("ensemble_data.csv", df)
+save_binned_data("extrusion_statistics", df; bin_pos_emt = true, Δt = Δt, Δy = Δy)
 
+
+using CSV, DataFrames, Statistics
+
+function cor_(X,Y)
+    inds = @. isfinite(X) && isfinite(Y)
+    X_ = X[ inds ]
+    Y_ = Y[ inds ]
+    
+    return sum(inds) > 0 ? cor(X_, Y_) : NaN
+end
+
+
+function delta_emt(df) 
+    minmax = filter(isfinite, (df.A, df.B, df.S))
+    if length(minmax) <= 1
+        return NaN
+    else
+        return maximum(minmax) - minimum(minmax)
+    end
+end
+
+
+df_cor = deepcopy(df)
+
+df_cor[!,:Δt_emt] = delta_emt.(eachrow(df))
+
+# rename columns and make events B and P mutually exclusive
+
+df_cor.A .= @. isfinite(df.A)
+df_cor.B .= @. isfinite(df.B) && !isfinite(df.P)
+df_cor.P .= @. isfinite(df.B) && isfinite(df.P)
+df_cor.S .= @. isfinite(df.S)
+
+df_cor[!,:t_A] .= df.A 
+df_cor[!,:t_B] .= df.B
+df_cor[!,:t_P] .= df.B 
+df_cor[!,:t_S] .= df.S
+
+# make events B and P mutually exclusive
+df_cor.t_B[.!df_cor.B] .= NaN
+df_cor.t_P[.!df_cor.P] .= NaN
+
+df_cor.y_B[.!df_cor.B] .= NaN
+df_cor.y_P .= df.y_B
+df_cor.y_P[.!df_cor.P] .= NaN
+
+
+df_inm = df_cor[df.INM .== true, :]
+df_no_inm = df_cor[df.INM .== false, :]
+
+using CairoMakie
+
+xaxis = ("A", "B", "P", "S", "t_A", "t_B", "t_P", "t_S", "Δt_emt", "y_init", "y_emt", "y_A", "y_B", "y_P", "y_S")
+
+ydata_inm_a = [cor_(df_inm[!,col], df_inm.apical_extr) for col in xaxis]
+ydata_no_inm_a = [cor_(df_no_inm[!,col], df_no_inm.apical_extr) for col in xaxis]
+
+ydata_inm = [cor_(df_inm[!,col], df_inm.basal_extr) for col in xaxis]
+ydata_no_inm = [cor_(df_no_inm[!,col], df_no_inm.basal_extr) for col in xaxis]
+
+cor(df_inm.t_B, df_inm.basal_extr)
+
+begin
+    fig = Figure(size = (1024, 512), fontsize = 18)
+    ax = Axis(fig[1, 1], ylabel = "correlation factor", title = "Apical extrusion", 
+    xticks = (1:15,collect(xaxis)), xticklabelrotation = pi/4)
+    ylims!(ax, -1, 1)
+
+    xdata = Float64.(1:15) 
+    hlines!(ax, [0], color = :gray, linestyle = :dash, linewidth = 2)
+    scatter!(ax, ydata_inm_a, color = "#d6d5d3", markersize = 15, strokewidth = 1, strokecolor = :black, label = "INM")
+    scatter!(ax, ydata_no_inm_a, color = "#ffa6a4", markersize = 15, strokewidth = 1, strokecolor = :black, label = "No INM")
+    
+
+    ax = Axis(fig[1, 2], title = "Basal extrusion", 
+    xticks = (1:15,collect(xaxis)), xticklabelrotation = pi/4)
+    ylims!(ax, -1, 1)
+    hlines!(ax, [0], color = :gray, linestyle = :dash, linewidth = 2)
+    scatter!(ax, ydata_inm, color = "#d6d5d3", markersize = 15, strokewidth = 1, strokecolor = :black, label = "INM")
+    scatter!(ax, ydata_no_inm, color = "#ffa6a4", markersize = 15, strokewidth = 1, strokecolor = :black, label = "no INM")
+    
+    Legend(fig[1,end+1], ax, tellheight = false)
+
+    save("correlation_factors.png", fig)
+    fig
+end

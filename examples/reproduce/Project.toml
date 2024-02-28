@@ -1,5 +1,8 @@
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 ProgressMeter = "92933f4c-e287-5a05-a399-4b506db050ca"
+Query = "1a8c2f83-1ff3-5112-b086-8aa67b057ba1"
 SEMTor = "3aa00187-1793-4006-8dbf-b0a7dd891f4e"
+XLSX = "fdbf4ff8-1666-58a4-91e7-1b58723a45e0"
