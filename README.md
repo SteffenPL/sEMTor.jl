@@ -9,7 +9,7 @@
 Julia implementation for a computational model for epithelial-to-mesenchymal transitions-like events in a pseudostratified epithelium.
 
 Implementation for the computational model used in:
-- S. Plunder, C. Danesin, B. Glise, M. A. Ferreira](https://marinaaferreira.com/), [S. Merino-Aceituno](https://sites.google.com/view/saramerinoaceituno), [E. Theveneau](https://cbi-toulouse.fr/eng/equipe-theveneau), _Modelling variability and heterogeneity of EMT scenarios highlights nuclear positioning and protrusions as main drivers of extrusion._ **Nature Communications** **(2024)** [DOI:10.1038/s41467-024-51372-z](https://doi.org/10.1038/s41467-024-51372-z).
+- [S. Plunder](https://steffenpl.github.io), C. Danesin, B. Glise, [M. A. Ferreira](https://marinaaferreira.com/), [S. Merino-Aceituno](https://sites.google.com/view/saramerinoaceituno), [E. Theveneau](https://cbi-toulouse.fr/eng/equipe-theveneau), _Modelling variability and heterogeneity of EMT scenarios highlights nuclear positioning and protrusions as main drivers of extrusion._ **Nature Communications** **(2024)** [DOI:10.1038/s41467-024-51372-z](https://doi.org/10.1038/s41467-024-51372-z).
 - E. Despin-Guitard, V. S. Rosa, S. Plunder, N. Mathiah, K. Van Schoor, E. Nehme, S. Merino-Aceituno, J. Egea, M. N. Shahbazi, [E. Theveneau](https://cbi-toulouse.fr/eng/equipe-theveneau) & [I. Migeotte](https://iribhm.org/isabelle-migeotte/), _Non-apical mitoses contribute to cell delamination during mouse gastrulation._ **Nature Communications** **(2024)** [DOI:10.1038/s41467-024-51638-6]
 
 
